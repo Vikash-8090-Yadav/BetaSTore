@@ -44,16 +44,7 @@ export const BiconomyProvider = ({ children }: { children: React.ReactNode }) =>
         paymasterUrl: "https://paymaster.biconomy.io/api/v1/80001/3jXNlaLzq.67a4909a-3d7a-4ea4-8cfc-f990d08808e9" as string,
       }), []);
 
-    // const bundler: IBundler = useMemo(() => new Bundler({
-    //     bundlerUrl: "https://bundler.biconomy.io/api/v2/80001/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44" as string,
-    //     chainId: ChainId.POLYGON_MUMBAI,
-    //     entryPointAddress: DEFAULT_ENTRYPOINT_ADDRESS,
-    //   }), []);
-
-    // const paymaster: IPaymaster = useMemo(() => new BiconomyPaymaster({
-    //     paymasterUrl: "https://paymaster.biconomy.io/api/v1/80001/3jXNlaLzq.67a4909a-3d7a-4ea4-8cfc-f990d08808e9" as string,
-    //   }), []);
-
+ 
       const connect = async () => {
         // @ts-ignore
         const { ethereum } = window;

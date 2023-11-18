@@ -128,12 +128,35 @@ const [file, setFile] = useState(null);
 
 
   async function listNFTForSale(e) {
+
+
+    // e.preventDefault();
+
+    // const url = await uploadToIPFS();
+    // const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // await provider.send('eth_requestAccounts', []);
+    // const signer = provider.getSigner();
+
+    // /* next, create the item */
+    // const price = ethers.utils.parseUnits(formInput.price, 'ether');
+    // let contract = new ethers.Contract(
+    //   marketplaceAddress,
+    //   NFTMarketplace.abi,
+    //   signer
+    // );
+    // let listingPrice = await contract.getListingPrice();
+    // listingPrice = listingPrice.toString();
+    // let transaction = await contract.createToken(url, price, { value: listingPrice });
+    // await transaction.wait();
+    // alert('Successfully created NFT');
+    // toast.success("Files uploaded sucessfully");
+    // router.replace('/marketplace');
+    
     e.preventDefault();
 
     const url = await uploadToIPFS();
-    alert(url)
-    const provider =  new ethers.providers.JsonRpcProvider("https://polygon-mumbai.infura.io/v3/95688893704a4d5bac083296c3547383")
-    
+    // const provider =  new ethers.providers.JsonRpcProvider("https://polygon-mumbai.infura.io/v3/95688893704a4d5bac083296c3547383")
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
 
     
     const price = ethers.utils.parseUnits(formInput.price, 'ether');
@@ -148,7 +171,7 @@ const [file, setFile] = useState(null);
     //   signer
     // );
     let listingPrice = await contract.getListingPrice();
-    listingPrice = listingPrice.toString();
+    listingPrice = ethers.utils.parseEther(listingPrice.toString());
     
 
 try{
@@ -156,36 +179,44 @@ try{
   console.log("Url is",url)
   console.log("Price is",price)
   console.log("\listing is",listingPrice)
-    const approvalTrx = await contract.populateTransaction.createToken(url, price, { value: listingPrice })
 
-    console.log(approvalTrx.data);
+  // const nftInterface = new ethers.utils.Interface([
+  //   "function createToken(string memory tokenURI, uint256 price)",
+  // ]);
+  
+  // const data = nftInterface.encodeFunctionData("createToken", [url, price]);
+    const approvalTrx = await contract.populateTransaction.createToken(url, price, { value: ethers.utils.parseEther(listingPrice.toString())})
+
+    console.log(approvalTrx);
 
   //   // let transaction = await contract.createToken(url, price, { value: listingPrice });
+
 
     const tx1 = {
       to: marketplaceAddress,
       data: approvalTrx.data,
     }
+console.log(tx1);
 
     // const txResponse = await smartAccount.sendTransaction({ transaction: tx1 })
     let  userOp = await smartAccount.buildUserOp([tx1]);
     console.log({ userOp })
-    // const biconomyPaymaster =
-    //     smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
-    //   let paymasterServiceData: SponsorUserOperationDto = {
-    //     mode: PaymasterMode.SPONSORED,
-    //     smartAccountInfo: {
-    //       name: 'BICONOMY',
-    //       version: '2.0.0'
-    //     },
-    //   };
-    //   const paymasterAndDataResponse =
-    //     await biconomyPaymaster.getPaymasterAndData(
-    //       userOp,
-    //       paymasterServiceData
-    //     );
+    const biconomyPaymaster =
+        smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
+      let paymasterServiceData: SponsorUserOperationDto = {
+        mode: PaymasterMode.SPONSORED,
+        smartAccountInfo: {
+          name: 'BICONOMY',
+          version: '2.0.0'
+        },
+      };
+      const paymasterAndDataResponse =
+        await biconomyPaymaster.getPaymasterAndData(
+          userOp,
+          paymasterServiceData
+        );
         
-    //   userOp.paymasterAndData = paymasterAndDataResponse.paymasterAndData;
+      userOp.paymasterAndData = paymasterAndDataResponse.paymasterAndData;
       const userOpResponse = await smartAccount.sendUserOp(userOp);
       console.log("userOpHash", userOpResponse);
       const { receipt } = await userOpResponse.wait(1);
@@ -198,7 +229,7 @@ try{
     // await transaction.wait();
     alert('Successfully created NFT');
     toast.success("Files uploaded sucessfully");
-    router.replace('/marketplace');
+    // router.replace('/marketplace');
   }
 
   return (
