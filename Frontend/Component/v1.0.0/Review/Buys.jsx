@@ -1,34 +1,26 @@
 import { ethers } from "ethers";
-import Image from "next/image";
-// import Coffee from "../public/Images/Coffee.png"
-import { Button } from "antd";
+
+import usdcAbi from "./usdcAbi.json"
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useBiconomy } from "../../Hooks/BiconomyContext";
+import CreateSession from "../../Hooks/CreateSessionContext";
+// const cntaddress = "0xe589368bd5B640A76b533240BE31962c75ded498";
+const marketplaceAddress="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
 
 
-
-
-import nftcntrct from "../../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json";
-import { Modal, Input, Tooltip } from 'antd'
-const cntaddress = "0xe589368bd5B640A76b533240BE31962c75ded498";
-
-let walletprovider;
-if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-    const {ethereum} =window;
-    walletprovider = new  ethers.providers.Web3Provider(
-      ethereum
-    )
-} else {
-  
-}
 
 
 
 
 
 const Buy = ({ state }) => {
+  const {provider,smartAccount, smartAccountAddress,connect} = useBiconomy();
 
   const buyChai = async (event) => {
     
     event.preventDefault();
+    
     const { contract } = state;
     const name = document.querySelector("#name").value;
     const message = document.querySelector("#message").value;
@@ -38,12 +30,65 @@ const Buy = ({ state }) => {
     alert("moving to meesage");
     alert(message);
     const amount = { value: ethers.utils.parseEther("0.001") };
-    const transaction = await contract.buyChai(name, message,amount);
-    await transaction.wait();
-    alert(name);
-    alert("moving to meesage");
-    alert(message);
-    console.log("Transaction is done");
+    // const transaction = await contract
+    // console
+    try{
+    
+      const approvalTrx = await contract.populateTransaction.buyChai(name, message,amount);
+  
+      console.log(approvalTrx);
+  
+  
+      const tx1 = {
+        to: marketplaceAddress,
+        data: approvalTrx.data,
+        value: ethers.utils.parseEther('0.001'),
+  
+      }
+  console.log(tx1);
+  
+      // const txResponse = await smartAccount.sendTransaction({ transaction: tx1 })
+      const userOp = await smartAccount.buildUserOp([tx1]);
+      console.log({ userOp })
+      // const biconomyPaymaster =
+      //     smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
+      //   let paymasterServiceData: SponsorUserOperationDto = {
+      //     mode: PaymasterMode.SPONSORED,
+      //     smartAccountInfo: {
+      //       name: 'BICONOMY',
+      //       version: '2.0.0'
+      //     },
+      //   };
+      //   const paymasterAndDataResponse =
+      //     await biconomyPaymaster.getPaymasterAndData(
+      //       userOp,
+      //       paymasterServiceData
+      //     );
+          
+      //   userOp.paymasterAndData = paymasterAndDataResponse.paymasterAndData;
+        const userOpResponse = await smartAccount.sendUserOp(userOp);
+        console.log("userOpHash", userOpResponse);
+        const { receipt } = await userOpResponse.wait(1);
+        console.log("txHash", receipt.transactionHash);
+        const polygonScanlink = `https://mumbai.polygonscan.com/tx/${receipt.transactionHash}`
+        toast.success(<a target="_blank" href={polygonScanlink}>Success Click to view transaction</a>, {
+          position: "top-right",
+          autoClose: 18000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+    }catch(error){
+      console.log(error)
+    }
+    // await transaction.wait();
+    // alert(name);
+    // alert("moving to meesage");
+    // alert(message);
+    // console.log("Transaction is done");
     
   };
   
@@ -68,7 +113,10 @@ const Buy = ({ state }) => {
                 </form>
             </div>
         </div>
+        
+        
       </div>
+     
     </>
   );
 };

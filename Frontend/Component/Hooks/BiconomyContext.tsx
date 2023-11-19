@@ -2,9 +2,8 @@ import React, { useState, useMemo, useEffect, useContext } from "react";
 import { IBundler, Bundler } from '@biconomy/bundler';
 import { IPaymaster, BiconomyPaymaster } from '@biconomy/paymaster';
 import { ChainId } from "@biconomy/core-types";
-import Navbar from "../v1.0.0/Navbar/Navbar";
-import { BiconomySmartAccountV2, DEFAULT_ENTRYPOINT_ADDRESS  } from "@biconomy/account";
-import { ECDSAOwnershipValidationModule, DEFAULT_ECDSA_OWNERSHIP_MODULE } from "@biconomy/modules";
+  import { BiconomySmartAccountV2, DEFAULT_ENTRYPOINT_ADDRESS  } from "@biconomy/account";
+  import { ECDSAOwnershipValidationModule, DEFAULT_ECDSA_OWNERSHIP_MODULE } from "@biconomy/modules";
 import { ethers  } from 'ethers'
 
 interface BiconomyInterface {
@@ -16,6 +15,7 @@ interface BiconomyInterface {
 interface ChildComponentProps {
     connectFunction: () => Promise<void>; // Adjust the type as per your actual function signature
   }
+  
 const BiconomyContext = React.createContext<BiconomyInterface>({
     smartAccount: undefined,
     smartAccountAddress: undefined,
@@ -53,10 +53,21 @@ export const BiconomyProvider = ({ children }: { children: React.ReactNode }) =>
           const provider = new ethers.providers.Web3Provider(ethereum)
           await provider.send("eth_requestAccounts", []);
           const signer = provider.getSigner();
+
+          console.log(provider);
+        
           const ownerShipModule = await ECDSAOwnershipValidationModule.create({
-            signer: signer
+          signer: signer
           })
           setProvider(provider)
+          const providerData = {
+            // Extract necessary information from the provider object
+            // For example:
+            network: provider.getSigner(),
+            // Add other necessary properties here
+          };
+          
+          
     
           let biconomySmartAccount = await BiconomySmartAccountV2.create({
             chainId: ChainId.POLYGON_MUMBAI,

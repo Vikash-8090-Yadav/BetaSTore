@@ -1,7 +1,8 @@
-import {
-    marketplaceAddress
-  } from '../config'
-  
+// import {
+//     marketplaceAddress
+//   } from '../config'
+
+  const marketplaceAddress = "0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174";
 import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
   
 
@@ -11,8 +12,15 @@ import Buy from  "../Component/v1.0.0/Review/Buys"
 import Memos from "../Component/v1.0.0/Review/Memos";
 
 
+import { useBiconomy } from '../Component/Hooks/BiconomyContext';
+import CreateSession from '../Component/Hooks/CreateSessionContext';
+
+
+
 
 function Review() {
+  
+  const {provider,smartAccount, smartAccountAddress,connect} = useBiconomy();
   const [state, setState] = useState({
     provider: null,
     signer: null,

@@ -1,13 +1,18 @@
-import { useState } from 'react';
+
 import { ethers } from 'ethers';
 import { useRouter } from 'next/router';
+import React, { useState, useMemo, useEffect, useContext } from "react";
 import Image from 'next/image';
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {DEFAULT_ENTRYPOINT_ADDRESS  } from "@biconomy/account";
+import { ECDSAOwnershipValidationModule, DEFAULT_ECDSA_OWNERSHIP_MODULE } from "@biconomy/modules";
+import { SessionKeyManagerModule, DEFAULT_SESSION_KEY_MANAGER_MODULE  } from "@biconomy/modules";
 import { TailSpin } from "react-loader-spinner";
 import Navbar from "../Component/Course/Nav";
 import { BiconomySmartAccountV2 } from "@biconomy/account"
 import { useBiconomy } from '../Component/Hooks/BiconomyContext';
-
+import CreateSession from '../Component/Hooks/CreateSessionContext';
 import { IHybridPaymaster, PaymasterFeeQuote, PaymasterMode, SponsorUserOperationDto } from "@biconomy/paymaster";
 
 
@@ -35,10 +40,12 @@ import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketp
 
 const CreateItem=() => {
 
-  const {smartAccount, smartAccountAddress,connect} = useBiconomy();
+  const {provider,smartAccount, smartAccountAddress,connect} = useBiconomy();
+
 
 
  console.log(smartAccount)
+ console.log(provider);
 
 const [file, setFile] = useState(null);
 
@@ -78,7 +85,7 @@ const [file, setFile] = useState(null);
     const { name, description, price } = formInput;
 
 
-    if( !name){
+    if(!name){
       toast.warn("Asset Name filed is empty");
     }
     else if(description == ""){
@@ -93,9 +100,9 @@ const [file, setFile] = useState(null);
    
 
   
-    // if (!name || !description || !price || !fileUrl) return;
+    if (!name || !description || !price || !fileUrl) return;
  
-    /* first, upload to IPFS */
+
     
     const data = JSON.stringify({
       name,
@@ -104,7 +111,7 @@ const [file, setFile] = useState(null);
     });
 
     try {
-      alert("clinet.add started")
+      
 
 
 
@@ -112,7 +119,6 @@ const [file, setFile] = useState(null);
       const added = await client.add(data);
       const url =  `https://sal-dapp.infura-ipfs.io/ipfs/${added.path}`;
       
-
       return url;
     } catch (error) {
       toast.warn("Error uploading image");
@@ -127,36 +133,13 @@ const [file, setFile] = useState(null);
   }
 
 
-  async function listNFTForSale(e) {
-
-
-    // e.preventDefault();
-
-    // const url = await uploadToIPFS();
-    // const provider = new ethers.providers.Web3Provider(window.ethereum);
-    // await provider.send('eth_requestAccounts', []);
-    // const signer = provider.getSigner();
-
-    // /* next, create the item */
-    // const price = ethers.utils.parseUnits(formInput.price, 'ether');
-    // let contract = new ethers.Contract(
-    //   marketplaceAddress,
-    //   NFTMarketplace.abi,
-    //   signer
-    // );
-    // let listingPrice = await contract.getListingPrice();
-    // listingPrice = listingPrice.toString();
-    // let transaction = await contract.createToken(url, price, { value: listingPrice });
-    // await transaction.wait();
-    // alert('Successfully created NFT');
-    // toast.success("Files uploaded sucessfully");
-    // router.replace('/marketplace');
+  async function listNFTForSale(e: { preventDefault: () => void; }) {
     
     e.preventDefault();
 
     const url = await uploadToIPFS();
     // const provider =  new ethers.providers.JsonRpcProvider("https://polygon-mumbai.infura.io/v3/95688893704a4d5bac083296c3547383")
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // const signer = provider.getSigner();
 
     
     const price = ethers.utils.parseUnits(formInput.price, 'ether');
@@ -165,62 +148,60 @@ const [file, setFile] = useState(null);
       NFTMarketplace.abi,
       provider
     );
-    // let contract1 = new ethers.Contract(
-    //   marketplaceAddress,
-    //   NFTMarketplace.abi,
-    //   signer
-    // );
+    
     let listingPrice = await contract.getListingPrice();
     listingPrice = ethers.utils.parseEther(listingPrice.toString());
     
 
 try{
 
-  console.log("Url is",url)
-  console.log("Price is",price)
-  console.log("\listing is",listingPrice)
-
-  // const nftInterface = new ethers.utils.Interface([
-  //   "function createToken(string memory tokenURI, uint256 price)",
-  // ]);
-  
-  // const data = nftInterface.encodeFunctionData("createToken", [url, price]);
-    const approvalTrx = await contract.populateTransaction.createToken(url, price, { value: ethers.utils.parseEther(listingPrice.toString())})
+    const approvalTrx = await contract.populateTransaction.createToken(url, price)
 
     console.log(approvalTrx);
-
-  //   // let transaction = await contract.createToken(url, price, { value: listingPrice });
 
 
     const tx1 = {
       to: marketplaceAddress,
       data: approvalTrx.data,
+      value: ethers.utils.parseEther('0.025'),
+
     }
 console.log(tx1);
 
     // const txResponse = await smartAccount.sendTransaction({ transaction: tx1 })
-    let  userOp = await smartAccount.buildUserOp([tx1]);
+    const userOp = await smartAccount.buildUserOp([tx1]);
     console.log({ userOp })
-    const biconomyPaymaster =
-        smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
-      let paymasterServiceData: SponsorUserOperationDto = {
-        mode: PaymasterMode.SPONSORED,
-        smartAccountInfo: {
-          name: 'BICONOMY',
-          version: '2.0.0'
-        },
-      };
-      const paymasterAndDataResponse =
-        await biconomyPaymaster.getPaymasterAndData(
-          userOp,
-          paymasterServiceData
-        );
+    // const biconomyPaymaster =
+    //     smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
+    //   let paymasterServiceData: SponsorUserOperationDto = {
+    //     mode: PaymasterMode.SPONSORED,
+    //     smartAccountInfo: {
+    //       name: 'BICONOMY',
+    //       version: '2.0.0'
+    //     },
+    //   };
+    //   const paymasterAndDataResponse =
+    //     await biconomyPaymaster.getPaymasterAndData(
+    //       userOp,
+    //       paymasterServiceData
+    //     );
         
-      userOp.paymasterAndData = paymasterAndDataResponse.paymasterAndData;
+    //   userOp.paymasterAndData = paymasterAndDataResponse.paymasterAndData;
       const userOpResponse = await smartAccount.sendUserOp(userOp);
       console.log("userOpHash", userOpResponse);
       const { receipt } = await userOpResponse.wait(1);
       console.log("txHash", receipt.transactionHash);
+      const polygonScanlink = `https://mumbai.polygonscan.com/tx/${receipt.transactionHash}`
+      toast.success(<a target="_blank" href={polygonScanlink}>Success Click to view transaction</a>, {
+        position: "top-right",
+        autoClose: 18000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
   }catch(error){
     console.log(error)
   }
@@ -229,13 +210,13 @@ console.log(tx1);
     // await transaction.wait();
     alert('Successfully created NFT');
     toast.success("Files uploaded sucessfully");
-    // router.replace('/marketplace');
+    router.replace('/marketplace');
   }
 
   return (
     <>
+    <Navbar/>
       <div className="min-h-screen py-10 bg-gradient-to-r from-green-700 to-green-300">
-      <Navbar/>
         <div className="container mx-auto">
           {/* <Auth/> */}
           <div className="flex w-8/12 bg-white flex-col md:flex-row rounded-xl mx-auto shadow-lg overflow-hidden">
@@ -296,6 +277,7 @@ console.log(tx1);
           </div>
           </div>
         </div>
+       
       </div>
   
     </>

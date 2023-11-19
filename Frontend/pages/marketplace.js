@@ -1,14 +1,28 @@
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Web3Modal from 'web3modal'
+import { useRouter } from 'next/router';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import Navbar from "../Component/Course/Nav";
+import { TailSpin } from "react-loader-spinner";
 import Navbar from "../Component/Course/Nav";
+import { BiconomySmartAccountV2 } from "@biconomy/account"
+import { useBiconomy } from '../Component/Hooks/BiconomyContext';
+
+import { IHybridPaymaster, PaymasterFeeQuote, PaymasterMode, SponsorUserOperationDto } from "@biconomy/paymaster";
 // import {
 //   marketplaceAddress
 // } from '../config'
+
+
+
 const marketplaceAddress ="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
 import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 export default function Home() {
+  const router = useRouter();
+  const {smartAccount, smartAccountAddress,connect,provider} = useBiconomy();
+
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
   useEffect(() => {
@@ -16,11 +30,11 @@ export default function Home() {
   }, [])
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []);
+    // const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // await provider.send('eth_requestAccounts', []);
     const signer = provider.getSigner();
     
-    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, provider)
+    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
     const data = await contract.fetchMarketItems()
 
     /*
@@ -47,23 +61,92 @@ export default function Home() {
   }
   async function buyNft(nft) {
     /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []);
+    // const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // await provider.send('eth_requestAccounts', []);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
+    // const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
 
     /* user will be prompted to pay the asking proces to complete the transaction */
-    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')   
-    const transaction = await contract.createMarketSale(nft.tokenId, {
-      value: price
-    })
-    await transaction.wait()
+    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether') 
+    
+    alert(price)
+    // const transaction = await contract.createMarketSale(nft.tokenId, {
+    //   value: price
+    // })
+
+    let contract = new ethers.Contract(
+      marketplaceAddress,
+      NFTMarketplace.abi,
+      provider
+    );
+
+
+try{
+  
+  const approvalTrx = await contract.populateTransaction.createMarketSale(nft.tokenId);
+
+  console.log(approvalTrx);
+
+
+  const tx1 = {
+    to: marketplaceAddress,
+    data: approvalTrx.data,
+    value: price,
+
+  }
+console.log(tx1);
+
+  // const txResponse = await smartAccount.sendTransaction({ transaction: tx1 })
+  const userOp = await smartAccount.buildUserOp([tx1]);
+  console.log({ userOp })
+  // const biconomyPaymaster =
+  //     smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
+  //   let paymasterServiceData: SponsorUserOperationDto = {
+  //     mode: PaymasterMode.SPONSORED,
+  //     smartAccountInfo: {
+  //       name: 'BICONOMY',
+  //       version: '2.0.0'
+  //     },
+  //   };
+  //   const paymasterAndDataResponse =
+  //     await biconomyPaymaster.getPaymasterAndData(
+  //       userOp,
+  //       paymasterServiceData
+  //     );
+      
+  //   userOp.paymasterAndData = paymasterAndDataResponse.paymasterAndData;
+
+    const userOpResponse = await smartAccount.sendUserOp(userOp);
+    console.log("userOpHash", userOpResponse);
+    const { receipt } = await userOpResponse.wait(1);
+    console.log("txHash", receipt.transactionHash);
+    const polygonScanlink = `https://mumbai.polygonscan.com/tx/${receipt.transactionHash}`
+    toast.success(<a target="_blank" href={polygonScanlink}>Success Click to view transaction</a>, {
+      position: "top-right",
+      autoClose: 18000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+}catch(error){
+  console.log(error)
+}
+
+
+
+    // await transaction.wait()
     loadNFTs()
+  
   }
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-white text-3xl">No Courses in marketplace</h1>)
   return (
-    <div className="flex mrkt  justify-center">
-      {/* <Navbar/> */}
+    <div>
+      <Navbar/>
+    
+    <div className="flex  justify-center">
       <div className="px-10" style={{ maxWidth: '1600px' }}>
         <div className="grid flex  grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 unmrk">
           {
@@ -85,6 +168,7 @@ export default function Home() {
           }
         </div>
       </div>
+    </div>
     </div>
   )
 }

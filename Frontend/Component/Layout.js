@@ -4,11 +4,11 @@ import Hero from "./v1.0.0/hero/Hero";
 import About from "./v1.0.0/about/About";
 import Problem from "./v1.0.0/problemsolved/Problem";
 import Footer from "./v1.0.0/footer/footer";
-
+import Navbar from "../Component/v1.0.0/Navbar/Navbar"
 import HappyClient from "./v1.0.0/happyClient/HappyClient";
 import Explore from "./v1.0.0/Explore/Explore";
 import Card from "../Component/v1.0.0/Cards/Cards"
-
+import { ToastContainer } from 'react-toastify';
 
 export default function Layout({ children }) {
   
@@ -21,7 +21,8 @@ export default function Layout({ children }) {
 
         {/* Below commented component only works if Navbar is imported in _app.js || To be done so once ever component listed below is complete */}
         {/* <Navbar handleLogout={handleLogout}/> */} 
-
+        <Navbar/>
+        <ToastContainer/>
         {children}
 
 

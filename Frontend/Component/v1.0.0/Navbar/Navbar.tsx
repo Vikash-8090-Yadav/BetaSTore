@@ -11,7 +11,7 @@ const Navbar = () =>{
   const {smartAccount, smartAccountAddress,connect} = useBiconomy();
 
 
-  const [address, setAddress] = useState<string>("")
+  const [address, setAddress] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     // This effect will run once when the component mounts
@@ -22,10 +22,13 @@ const Navbar = () =>{
 
 
   
-
+  const login = () => {
+    setAddress(smartAccountAddress);
+  }
 
   const logOut = () => {
     setAddress('');
+    setLoading(false)
   }
 
   window.localStorage.setItem("smartAccountAddress",smartAccountAddress);
