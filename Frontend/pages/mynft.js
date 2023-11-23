@@ -5,11 +5,11 @@ import Web3Modal from 'web3modal';
 import { useRouter } from 'next/router';
 import Navbar from "../Component/Course/Nav";
 import { useBiconomy } from '../Component/Hooks/BiconomyContext';
-// import { marketplaceAddress } from '../config';
-const marketplaceAddress ="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
+import { marketplaceAddress } from '../config';
+// const marketplaceAddress ="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
 
 
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
+import NFTMarketplace from '../../SmartContract/artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 
 export default function MyAssets() {
   const {provider,smartAccount, smartAccountAddress,connect} = useBiconomy();
@@ -20,23 +20,14 @@ export default function MyAssets() {
 
   useEffect(() => {
     loadNFTs();
+    connect();
   }, []);
 
   async function loadNFTs() {
-    // const web3Modal = new Web3Modal({
-    //   network: 'mainnet',
-    //   cacheProvider: true,
-    // });
-    // const connection = await web3Modal.connect();
-    
-    // const signer = provider.getSigner();
     
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []);
+    await provider.send('eth_requestAccounts', [""]);
     const signer = provider.getSigner();
-    // const signer = provider.getSigner();
-    // const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, provider)
-    // const signer = provider.getSigner();
 
     console.log(provider)
 
@@ -45,7 +36,8 @@ export default function MyAssets() {
       NFTMarketplace.abi,
       signer
     );
-    const data = await marketplaceContract.fetchMyNFTs();
+
+    const data = await marketplaceContract.fetchMyNFTs(smartAccountAddress);
 
     const items = await Promise.all(
       data.map(async (i) => {
@@ -74,7 +66,7 @@ export default function MyAssets() {
   }
 
   if (loadingState === 'loaded' && !nfts.length)
-    return <Navbar/> && <h1 className="py-10 px-20  text-white text-3xl">No Courses owned</h1>;
+    return <Navbar/> && <h1 className="mmn py-10 px-20  text-white text-3xl">No Courses owned</h1>;
 
   return (
     <div>  <Navbar/>

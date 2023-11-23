@@ -11,6 +11,8 @@ import Explore from "../Component/v1.0.0/Explore/Explore";
 
 import Card from "../Component/v1.0.0/Cards/Cards"
 
+// import Upload from "../Component/SpheronSdk/Spheron"
+import Market from "./Market"
 
 export default function Home(){
  
@@ -20,7 +22,6 @@ export default function Home(){
         <Hero/>
         <About/> 
         <Explore/>
-        <Problem/>
        < Card/>
         <HappyClient/> 
 

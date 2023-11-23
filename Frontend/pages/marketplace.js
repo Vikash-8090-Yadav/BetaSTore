@@ -11,17 +11,14 @@ import { BiconomySmartAccountV2 } from "@biconomy/account"
 import { useBiconomy } from '../Component/Hooks/BiconomyContext';
 
 import { IHybridPaymaster, PaymasterFeeQuote, PaymasterMode, SponsorUserOperationDto } from "@biconomy/paymaster";
-// import {
-//   marketplaceAddress
-// } from '../config'
+import {
+  marketplaceAddress
+} from '../config'
 
-
-
-const marketplaceAddress ="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
+import NFTMarketplace from '../../SmartContract/artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 export default function Home() {
   const router = useRouter();
-  const {smartAccount, smartAccountAddress,connect,provider} = useBiconomy();
+  const {smartAccount, smartAccountAddress,connect} = useBiconomy();
 
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
@@ -30,8 +27,8 @@ export default function Home() {
   }, [])
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
-    // const provider = new ethers.providers.Web3Provider(window.ethereum);
-    // await provider.send('eth_requestAccounts', []);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []);
     const signer = provider.getSigner();
     
     const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
@@ -61,8 +58,8 @@ export default function Home() {
   }
   async function buyNft(nft) {
     /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-    // const provider = new ethers.providers.Web3Provider(window.ethereum);
-    // await provider.send('eth_requestAccounts', []);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []);
     const signer = provider.getSigner();
     // const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
 
@@ -141,7 +138,7 @@ console.log(tx1);
     loadNFTs()
   
   }
-  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-white text-3xl">No Courses in marketplace</h1>)
+  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="mmn px-20 py-10 text-white text-3xl">No Courses in marketplace</h1>)
   return (
     <div>
       <Navbar/>

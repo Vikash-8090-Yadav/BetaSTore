@@ -8,14 +8,13 @@ export default function Navbar() {
   const {smartAccount, smartAccountAddress,connect} = useBiconomy();
 
 
-  const [address, setAddress] = useState<string>("")
-  const [loading, setLoading] = useState<boolean>(false);
+  const [address, setAddress] = useState("")
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     // This effect will run once when the component mounts
     setAddress(smartAccountAddress);
   }, [smartAccountAddress]); 
 
-  const [provider, setProvider] = useState<ethers.providers.Provider | null>(null)
 
 
   
@@ -43,13 +42,11 @@ export default function Navbar() {
       <div className="hidden justify-between items-center sticky bg-green-500 md:flex p-12 text-9010FF  text-2xl nav-item font-bold font-serif justify-center items-center text-black h-8">
 
         <Link legacyBehavior href={"/marketplace"}>HOME</Link>
-        <Link legacyBehavior href={"/sellnft"}>SELL COURSE</Link>
-        {/* <NavLink to ="/sellnft">SELL COURSE</NavLink> */}
-        <Link legacyBehavior href={"/mynft"}>MY COURSE</Link>
+        <Link legacyBehavior href={"/sellnft"}>SELL ITEM</Link>
+        <Link legacyBehavior href={"/mynft"}>MY ITEM</Link>
         <Link legacyBehavior href={"/dashboard"}>DASHBOARD</Link>
-        <Link legacyBehavior href={"/Review"}>COURSE REVIEW</Link>
+        <Link legacyBehavior href={"/Review"}>ITEM REVIEW</Link>
       </div>
     </div>
   );
 }
-

@@ -21,8 +21,9 @@ function Market() {
     <div className="mrkt">
 
       <div className="mrkt `{style.wrapper}`">
-      <Navbar/>
+      
         <nav className={`${style.container} border-b p-10`}>
+       
           <p className="text-5xl py-12 text-white font-medium">Marketplace Hub</p>
           <Home/>
         </nav>

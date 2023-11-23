@@ -3,14 +3,16 @@ import { ethers } from 'ethers'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
+import Navbar from "../Component/Course/Nav";
 import { useBiconomy } from "../Component/Hooks/BiconomyContext";
-// import {
-//   marketplaceAddress
-// } from '../config'
+import {
+  marketplaceAddress
+} from '../config'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-const marketplaceAddress ="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
+// const marketplaceAddress ="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
+import NFTMarketplace from '../../SmartContract/artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 
 export default function ResellNFT() {
   const {smartAccount, smartAccountAddress,connect,provider} = useBiconomy();
@@ -105,11 +107,14 @@ console.log(tx1);
   }
 
   return (
+    <div>
+      <Navbar/>
+  
     <div className="flex  justify-center">
       <div className="w-1/2 mn flex flex-col py-22">
         <input
           placeholder="Asset Price in Eth"
-          className="mt-2 border rounded p-4"
+          className="mt-2 text-black border rounded p-4"
           onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
         />
         {
@@ -122,5 +127,6 @@ console.log(tx1);
         </button>
       </div>
     </div>
+      </div>
   )
 }

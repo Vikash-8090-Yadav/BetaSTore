@@ -34,9 +34,9 @@ const client = IPFSHTTPClient({
 });
 
 
-// import { marketplaceAddress } from '../config';
-const marketplaceAddress="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
+import { marketplaceAddress } from '../config';
+// const marketplaceAddress="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
+import NFTMarketplace from '../../SmartContract/artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 
 const CreateItem=() => {
 
@@ -94,9 +94,7 @@ const [file, setFile] = useState(null);
     else if(price== ""){
       toast.warn("Price filed is empty");
     }
-    else if(uploaded == false){
-      toast.warn("Files upload required");
-    }
+   
    
 
   
@@ -128,7 +126,7 @@ const [file, setFile] = useState(null);
     setuploading(false);
 		setuploaded(true);
 		 
-		toast.success("Files uploaded sucessfully");
+		toast.success("Uploaded to IPFS");
 
   }
 

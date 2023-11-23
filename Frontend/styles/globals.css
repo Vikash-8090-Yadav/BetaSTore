@@ -100,12 +100,6 @@ For LogoutBUtton
 
 }
 
-.mn{
-  margin-top: 122px;
-}
-.mrkt{
-  margin-top: 190px;
-}
 .nav-item{
   color: #9010FF;
   font-weight: 1200;
@@ -408,4 +402,9 @@ font-size: small;
 .nav-item{
   color: #9010FF;
   font-weight: 1200;
+}
+
+.mmn{
+  padding-top: 122px;
+  padding-left: 122px;
 }

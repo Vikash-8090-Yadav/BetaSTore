@@ -1,10 +1,9 @@
-// import {
-//     marketplaceAddress
-//   } from '../config'
+import {
+    marketplaceAddress
+  } from '../config'
 
-  const marketplaceAddress = "0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174";
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
-  
+  import NFTMarketplace from '../../SmartContract/artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
+  import Navbar from "../Component/Course/Nav";
 
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
@@ -67,6 +66,9 @@ function Review() {
   }, []);
   // console.log(state);
   return (
+    <div>
+      <Navbar/>
+ 
     <div className ="cnt" style={{ backgroundColor: "", height: "100%" }}>
       {/* <img src={chai} className="img-fluid" alt=".." height={556} width={742} /> */}
       <div className="container">
@@ -74,7 +76,9 @@ function Review() {
         <Memos state={state} />
       </div>
     </div>
+    </div>
   );
+
 }
 
 export default Review;

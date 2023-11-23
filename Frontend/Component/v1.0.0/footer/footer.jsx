@@ -32,7 +32,7 @@ const Footer = () => {
         <div className="flex mb-auto flex-wrap justify-center mx-auto">
          
           <div className="mt-2">
-            <h1 className="font-raleway text-3xl ml-3">EduDev Marketplace</h1>
+            <h1 className="font-raleway text-3xl ml-3">Item Collection</h1>
           
           </div>
         </div>
@@ -125,8 +125,8 @@ const Footer = () => {
         </div>
       </div>
       <div className="sm:px-40 flex justify-between text-sm py-10 bg-[#1B1B1B] text-white flex-col items-center sm:flex-row shadow-xl dark:bg-zinc-900">
-        <p>Copyright &copy; by EDU.DEV 2023</p>
-        <p className="mt-5 sm:mt-0">Powered by EDU.DEV</p>
+        <p>Copyright &copy; by ItemCollection 2023</p>
+        <p className="mt-5 sm:mt-0">Powered by ItemCollection</p>
       </div>
     </>
   );

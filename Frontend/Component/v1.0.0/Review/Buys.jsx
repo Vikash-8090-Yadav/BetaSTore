@@ -5,14 +5,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useBiconomy } from "../../Hooks/BiconomyContext";
 import CreateSession from "../../Hooks/CreateSessionContext";
-// const cntaddress = "0xe589368bd5B640A76b533240BE31962c75ded498";
-const marketplaceAddress="0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
-
-
-
-
-
-
+import { marketplaceAddress } from "../../../config";
+// const marketplaceAddress="0xb035D1D308642DED3889fe99c362e14cb828244c"
 
 const Buy = ({ state }) => {
   const {provider,smartAccount, smartAccountAddress,connect} = useBiconomy();
@@ -98,7 +92,7 @@ const Buy = ({ state }) => {
       <div name = "contact" className = "w-full  ml-28 p-6">
         <div className = "flex flex-col p-4 justify-center max-w-screen-lg mx-auto ">
             <div className = " mn pb-8">
-                <p className = "text-4xl font-bold text-center  flex items-center justify-center">Review  a Course
+                <p className = "text-4xl font-bold text-center  flex items-center justify-center">Review  an ITEM
                   {/* <Image src = {Coffee} height="50" width="50" className = "mx-3 transform flip-horizontal" /> */}
                 </p>
                 <p className = "py-6 text-center text-xl font-semibold">Submit the Review by filling  the form below .</p>
@@ -109,7 +103,7 @@ const Buy = ({ state }) => {
                     <input type = "text" id = "name" placeholder = "Enter Course name" className = "p-2 bg-transparent border-2 border-white rounded-md focus:outline-none text-white" />
                     <textarea placeholder = "Enter your Review Message" id = "message" rows = "8" className = "p-2 bg-transparent border-2 border-white rounded-md focus:outline-none text-white" />
                     <button  type="submit"
-                  disabled={!state.contract} className = " btn btn-primary px-6 py-6 bg-gradient-to-b from-cyan-500 to-blue-500 my-8 mx-auto flex items-center rounded-md hover:scale-110 duration-150 text-white  font-semibold" >Complete Review and Get Direct NFT </button>
+                  disabled={!state.contract} className = " btn btn-primary px-6 py-6 bg-gradient-to-b from-cyan-500 to-blue-500 my-8 mx-auto flex items-center rounded-md hover:scale-110 duration-150 text-white  font-semibold" >Complete Review </button>
                 </form>
             </div>
         </div>

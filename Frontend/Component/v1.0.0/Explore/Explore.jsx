@@ -17,9 +17,9 @@ function Explore() {
         <div className=" justify-between p-10 m-10  lg:w-[45%] space-y-5 sm:space-y-10">
           <h1 className="xl:text-5xl font-thin lg:text-4xl text-3xl my-4">
             <span className="font-semibold  text-5xl text-[#7EE787]">
-              Learn about some biggest
+              FAALL IN LOVE WITH 
             </span>{' '}
-            <span className="text-white text-5xl ">Web3 -startup Programs</span>
+            <span className="text-white text-5xl ">ACCOUNT ABSTRACTION  </span>
           </h1>
           <Link legacyBehavior href={"/Market"}>
             <button className=" bg-[#9010FF] text-[#FFFFFF] text-5xl mx-2 py-4 px-6 btn-green">Explore</button>
@@ -28,7 +28,7 @@ function Explore() {
         <div className="flex justify-center lg:w-4/5 relative md:p-10">
           <img
             className="relative z-0 sm:block hidden"
-            src="/About/Explore2.png"
+            src="/About/G.png"
             height={556} width={742}
             
             alt="H"
