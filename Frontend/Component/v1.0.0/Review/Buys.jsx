@@ -20,9 +20,6 @@ const Buy = ({ state }) => {
     const message = document.querySelector("#message").value;
 
     console.log(name, message, contract);
-    alert(name);
-    alert("moving to meesage");
-    alert(message);
     const amount = { value: ethers.utils.parseEther("0.001") };
     // const transaction = await contract
     // console
@@ -78,12 +75,6 @@ const Buy = ({ state }) => {
     }catch(error){
       console.log(error)
     }
-    // await transaction.wait();
-    // alert(name);
-    // alert("moving to meesage");
-    // alert(message);
-    // console.log("Transaction is done");
-    
   };
   
 
