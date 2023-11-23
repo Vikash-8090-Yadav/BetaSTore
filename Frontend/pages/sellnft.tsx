@@ -152,6 +152,16 @@ const [file, setFile] = useState(null);
     
 
 try{
+  toast.info('Listing intiated to the recipient...', {
+    position: "top-right",
+    autoClose: 15000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
 
     const approvalTrx = await contract.populateTransaction.createToken(url, price)
 
@@ -206,7 +216,6 @@ console.log(tx1);
 
 
     // await transaction.wait();
-    alert('Successfully created NFT');
     toast.success("Files uploaded sucessfully");
     router.replace('/marketplace');
   }

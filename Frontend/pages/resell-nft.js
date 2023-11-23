@@ -49,7 +49,16 @@ export default function ResellNFT() {
 
 
 try{
-  
+  toast.info('Re sell intiated to the recipient', {
+    position: "top-right",
+    autoClose: 15000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
   const approvalTrx = await contract.populateTransaction.resellToken(id, priceFormatted);
 
   console.log(approvalTrx);

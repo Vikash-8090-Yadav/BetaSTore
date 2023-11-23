@@ -56,7 +56,7 @@ const Card = () => {
 
           <div className='flex justify-center items-center mt-10'>
             <button className = "flex justify-center px-4 py-2 mx-auto text-xl from-[#FB65FE] from-100% to-[#9010FF] to-100% hover:rotate-2 delay-100 transition ease-in-out   text-center border hover:bg-gray-100 hover:shadow-md border-gray-500  rounded-md bg-green-500 text-cyan font-bold">
-              <Link legacyBehavior href={"/Market"} className = "text-white font-extrabold">Click -  Dive into the Marketplace Universe Dapp</Link>
+              <Link legacyBehavior href={"/marketplace"} className = "text-white font-extrabold">Click -  Dive into the Marketplace Universe Dapp</Link>
             </button>
           </div>
         </div>

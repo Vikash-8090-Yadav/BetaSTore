@@ -79,6 +79,16 @@ export default function Home() {
 
 
 try{
+  toast.info('Payement initiated to the recipient...', {
+    position: "top-right",
+    autoClose: 15000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
   
   const approvalTrx = await contract.populateTransaction.createMarketSale(nft.tokenId);
 

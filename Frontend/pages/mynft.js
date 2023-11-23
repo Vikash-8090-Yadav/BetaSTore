@@ -66,7 +66,8 @@ export default function MyAssets() {
   }
 
   if (loadingState === 'loaded' && !nfts.length)
-    return <Navbar/> && <h1 className="mmn py-10 px-20  text-white text-3xl">No Courses owned</h1>;
+ 
+    return (<h1 className="mmn py-10 px-20  text-white text-3xl">No Courses owned</h1>);
 
   return (
     <div>  <Navbar/>
