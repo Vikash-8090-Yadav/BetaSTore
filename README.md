@@ -174,8 +174,8 @@ Open your web browser and visit http://localhost:3000 to interact with the store
 ![Screenshot from 2023-11-27 00-43-23](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/ab207772-5146-46b4-b11e-c6e04963da89)
 
 
-### Graph 
-![Screenshot from 2023-10-15 07-59-26](https://github.com/Vikash-8090-Yadav/Decentralized-OLX/assets/85225156/0955f7a2-cca3-4f94-9368-e0525823e45f)
+### Biconomy Tranasactions
+
 
 
 ## 🛠️Technologies we used
