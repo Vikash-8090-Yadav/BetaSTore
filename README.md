@@ -99,15 +99,16 @@ Open your web browser and visit http://localhost:3000 to interact with the store
 
 "BetaStore" solves a multitude of issues commonly faced in traditional online marketplaces, as well as some unique challenges posed by the digital asset environment. Some of the key problems it addresses include:
 
-**Trust and Authenticity**: By leveraging blockchain technology, "Decentralised OLX" ensures that all listed items are authenticated and unique, thereby eliminating concerns about counterfeit or misrepresented products. The transparent nature of blockchain provides users with a secure and trustworthy platform for buying and selling rare items.
+**Trust and Authenticity:** By leveraging blockchain technology, "BetaStore" ensures that all listed items are authenticated and unique, thereby eliminating concerns about counterfeit or misrepresented products. The transparent nature of blockchain provides users with a secure and trustworthy platform for buying and selling rare items.
 
 **Intermediary Elimination:** The platform removes the need for intermediaries in the trading process, allowing users to engage in direct peer-to-peer transactions. This decentralization helps reduce costs and streamline the overall buying and selling experience, ensuring that users retain a more significant portion of the value generated from their transactions.
 
-**Global Accessibility:** "Decentralised OLX" provides a global marketplace where users from all corners of the world can participate in trading unique items. The platform's decentralized nature makes it accessible to anyone with an internet connection, thereby fostering a diverse and inclusive community of buyers and sellers.
+**Global Accessibility:** "BetaStore" provides a global marketplace where users from all corners of the world can participate in trading unique items. The platform's decentralized nature makes it accessible to anyone with an internet connection, thereby fostering a diverse and inclusive community of buyers and sellers.
 
 **Secure Transactions:** Through the use of blockchain and NFTs, the platform ensures that transactions are secure and irreversible, mitigating the risks associated with fraudulent activities and ensuring that both buyers and sellers can engage in transactions with confidence.
 
-**Community Engagement:** The platform fosters a community of like-minded individuals passionate about unique items, providing opportunities for engagement through discussions, forums, and events. This not only facilitates knowledge sharing and networking but also enhances the overall user experience, making it more than just a transactional platform.
+**Community Engagement:** The platform fosters a community of like-minded individuals passionate about unique items, providing opportunities for engagement through discussions, forums, and events. This facilitates knowledge sharing and networking and enhances the overall user experience, making it more than just a transactional platform.
+
 
 <br>
 
@@ -118,14 +119,17 @@ Open your web browser and visit http://localhost:3000 to interact with the store
 
 - Additionally, we faced significant difficulties in enabling users to resell courses. We wanted to allow users to buy and sell courses at different prices, and we had to ensure that the marketplace displayed the new price, but only to the user. Making it dynamic and connecting it to the marketplace was a challenge.
 
+**Account Abstraction:**
+- I  am a beginner in Account Abstraction and It's very difficult to manage all the transactions with the help of  userops and payemaster.
+- Getting lots of errors in the Session module key.
 
 
 **Frontend:**
-- The biggest challenge that I faced was to make the website compatiable with the browser and the device. This is the first thing which is to be kept in mind as a front-end developer to ensure that the website looks good and performs well on all existing browsers and devices with different screen sizes.
+- The biggest challenge I faced was making the website compatible with the browser and the device. This is the first thing which is to be kept in mind as a front-end developer to ensure that the website looks good and performs well on all existing browsers and devices with different screen sizes.
   
-- Next thing was to deal with the performance of the website. Since, if the website gives good performance and does the task in a speedy manner then it can reach to many problems and solve their issues. So, optimising the code is the next big task.
+The next thing was to deal with the performance of the website. Since, if the website gives good performance and does the task in a speedy manner then it can reach many problems and solve their issues. So, optimising the code is the next big task.
   
-- Debugging is another big challenge. Finding and fixing errors in code can be a tedious task at times. Developers can use browser dev tools, error console, and testing to debug their code effectively.
+- Debugging is another big challenge. Finding and fixing errors in code can be a tedious task at times. Developers can use browser dev tools, error consoles, and testing to debug their code effectively.
 
 <br>
 
@@ -136,6 +140,22 @@ Open your web browser and visit http://localhost:3000 to interact with the store
 
 ## Biconomy
 
+- EOA SIGN IN
+  ![Screenshot from 2023-11-27 01-06-35](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/a15538be-fd84-49f8-969a-7f0d27f321f1)
+
+- Selling/ Creating ITEM
+  At the time of creating ITEM Owner will send  some METT tokens to the one who is creating the Item.
+  ![Screenshot from 2023-11-27 01-07-39](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/59803a20-763a-49c4-b973-f2080fd13145)
+
+- Buying the Item
+   ![Screenshot from 2023-11-27 01-10-36](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/0b4e3c12-779d-44a1-901f-a699bb3498b4)
+
+ - Re-Listing the Item
+   ![Screenshot from 2023-11-27 01-13-12](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/e91857de-cabd-4ee4-a3cc-bec9674b7302)
+
+
+  - Donation/ Session key module
+     ![Screenshot from 2023-11-27 01-17-47](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/e2cff576-0b7c-460c-bd9d-c76b87946b3c)
 
 
 # Project Gallery
@@ -172,9 +192,6 @@ Open your web browser and visit http://localhost:3000 to interact with the store
 
 ### Donate Us
 ![Screenshot from 2023-11-27 00-43-23](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/ab207772-5146-46b4-b11e-c6e04963da89)
-
-
-### Biconomy Tranasactions
 
 
 
