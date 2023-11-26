@@ -8,11 +8,17 @@
 It is a marketplace where users can list their old items, and anyone can buy and resell them at a new price. After providing a review of a particular item, the user will receive an NFT as well.
 
 
+## Biconomy Integration
+- EOA SIGN IN
+- Batch Transaction
+- Session key module 
+-  Paymaster for transaction sponsor
+ 
 <h1 align="center"> 
   <img src="https://user-images.githubusercontent.com/85225156/215914335-d9a35b88-99ae-4769-8b1d-3b7e8ca3f993.png" width="35" height="30">
-  <span style="color: yellow">OLX.DAPp MarketPlace</span>
+  <span style="color: yellow">Store.Dapp MarketPlace</span>
 </h1>
-<p> <b>"Decentralised OLX" is a dynamic platform where users can effortlessly list and purchase rare, vintage, and unique items in the form of NFTs. Our user-friendly interface allows individuals to upload images of their cherished possessions, which are then transformed into verifiable NFTs. These NFTs are made available on our open marketplace, enabling users to engage in transparent and secure transactions, confident in the knowledge that the items they are acquiring are one-of-a-kind and authenticated through blockchain technology..</b> </p>
+<p> <b>"BetaStore" is a dynamic platform where users can effortlessly list and purchase rare, vintage, and unique items in the form of NFTs. Our user-friendly interface allows individuals to upload images of their cherished possessions, which are then transformed into verifiable NFTs. These NFTs are made available on our open marketplace, enabling users to engage in transparent and secure transactions, confident in the knowledge that the items they are acquiring are one-of-a-kind and authenticated through blockchain technology..</b> </p>
 
 <br>
 
@@ -24,7 +30,7 @@ It is a marketplace where users can list their old items, and anyone can buy and
 - [The problem it solves](#the-problem-it-solves)
 - [Challenges we ran into](#-challenges-we-ran-into)
 - [TRACK](#TRACK)
-  - [Graph](#Graph)
+  - [Biconomy](#Graph)
 - [Project Gallery](#Project-Gallery)
 - [Technologies we used](#%EF%B8%8Ftechnologies-we-used)
 - [Video Demo](#-video-demo)
@@ -36,7 +42,7 @@ It is a marketplace where users can list their old items, and anyone can buy and
 
  
 ## 💡Introduction
-Welcome to "Decentralised OLX," a groundbreaking decentralized application (Dapp) that is set to revolutionize the online marketplace. Our platform enables users to trade unique items seamlessly through the utilization of non-fungible tokens (NFTs) and blockchain technology. With a user-centric approach, we are dedicated to providing a transparent and secure environment for buyers and sellers to engage in the seamless exchange of rare and distinctive items. Join us in exploring a new era of decentralized online trading, where trust and authenticity are paramount.
+Welcome to "BetaStore," a groundbreaking decentralized application (Dapp) that is set to revolutionize the online marketplace. Our platform enables users to trade unique items seamlessly through the utilization of non-fungible tokens (NFTs) and blockchain technology. With a user-centric approach, we are dedicated to providing a transparent and secure environment for buyers and sellers to engage in the seamless exchange of rare and distinctive items. Join us in exploring a new era of decentralized online trading, where trust and authenticity are paramount.
  
 ## 💡Our Vision
 
@@ -53,7 +59,7 @@ Our vision is to create a global ecosystem that democratizes education, making i
     </tr>
     <tr>
       <td>Vercel</td>
-      <td>https://decentralized-olx.vercel.app/</td>
+      <td></td>
     </tr>
     </table>
 </div>
@@ -61,14 +67,14 @@ Our vision is to create a global ecosystem that democratizes education, making i
 
 ## 🚀 Setting up the project locally
 
-To run the Edu.dev locally, follow these steps:
+To run the BetaStore locally, follow these steps:
 1. Clone the repository:
  ```bash
- git clone https://github.com/Vikash-8090-Yadav/Decentralized-OLX
+ git clone https://github.com/Vikash-8090-Yadav/BetaSTore
  ```
  2. Navigate to the project directory:
 ```bash
-cd  Decentralized-OLX/Frontend
+cd  BetaSTore/Frontend
 ```
 3. Node Re-versioning
 
@@ -85,13 +91,13 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 6. Access the dApp:
-Open your web browser and visit http://localhost:3000 to interact with the OLX application.
+Open your web browser and visit http://localhost:3000 to interact with the store application.
 
 <br>
 
 ## 🔍The problem it solves
 
-"Decentralised OLX" solves a multitude of issues commonly faced in traditional online marketplaces, as well as some unique challenges posed by the digital asset environment. Some of the key problems it addresses include:
+"BetaStore" solves a multitude of issues commonly faced in traditional online marketplaces, as well as some unique challenges posed by the digital asset environment. Some of the key problems it addresses include:
 
 **Trust and Authenticity**: By leveraging blockchain technology, "Decentralised OLX" ensures that all listed items are authenticated and unique, thereby eliminating concerns about counterfeit or misrepresented products. The transparent nature of blockchain provides users with a secure and trustworthy platform for buying and selling rare items.
 
@@ -128,15 +134,8 @@ Open your web browser and visit http://localhost:3000 to interact with the OLX a
 
 ## TRACK
 
-## Graph
+## Biconomy
 
-### Subgraph Link:  https://thegraph.com/studio/subgraph/decentralised-olx/
-
-A subgraph extracts data from a blockchain, processing it and storing it so that it can be easily queried via GraphQL.
-
-**The below is the data that is stored in Graph protocol and used in frontend**
-
-![Screenshot from 2023-10-15 07-51-44](https://github.com/Vikash-8090-Yadav/Decentralized-OLX/assets/85225156/570cfcd1-df72-4570-a585-6117e75a2c90)
 
 
 # Project Gallery
@@ -149,7 +148,7 @@ A subgraph extracts data from a blockchain, processing it and storing it so that
 
 ### Marketplace 
 
-![Screenshot from 2023-10-15 07-53-25](https://github.com/Vikash-8090-Yadav/Decentralized-OLX/assets/85225156/20709d63-b7b9-40f5-a351-ce16c003165b)
+![Screenshot from 2023-11-27 00-37-44](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/27ec993b-2852-431a-b0ae-83203e4eb4ed)
 
 
 ### Sell ITEAM 
@@ -159,13 +158,20 @@ A subgraph extracts data from a blockchain, processing it and storing it so that
 
 ### My Item
 
-![Screenshot from 2023-10-15 07-56-12](https://github.com/Vikash-8090-Yadav/Decentralized-OLX/assets/85225156/47a422e1-c6ec-4182-b2df-a61b6fd97343)
+![Screenshot from 2023-11-27 00-40-03](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/a9825f2d-6477-43d6-ad03-e0f726e07ddb)
+
+
+### Dashboard
+![Screenshot from 2023-11-27 00-41-03](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/5441158d-ab8b-48a6-9fb9-256925159280)
 
 
 ### Review ITEM
 
 
-![Screenshot from 2023-10-15 07-58-53](https://github.com/Vikash-8090-Yadav/Decentralized-OLX/assets/85225156/26b8e185-b634-4cf1-b645-b76b187aeb42)
+![Screenshot from 2023-11-27 00-41-19](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/85dfed04-9553-4e71-8540-51c8856120ff)
+
+### Donate Us
+![Screenshot from 2023-11-27 00-43-23](https://github.com/Vikash-8090-Yadav/BetaSTore/assets/85225156/ab207772-5146-46b4-b11e-c6e04963da89)
 
 
 ### Graph 
