@@ -8,11 +8,12 @@
 It is a marketplace where users can list their old items, and anyone can buy and resell them at a new price. After providing a review of a particular item, the user will receive an NFT as well.
 
 
-## Biconomy Integration
+## Biconomy Integration and Filecoin
 - EOA SIGN IN
 - Batch Transaction
 - Session key module 
 -  Paymaster for transaction sponsor
+-  All metadata of the item is being stored on IPFS (Filecoin)
  
 <h1 align="center"> 
   <img src="https://user-images.githubusercontent.com/85225156/215914335-d9a35b88-99ae-4769-8b1d-3b7e8ca3f993.png" width="35" height="30">
