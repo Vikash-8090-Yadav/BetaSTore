@@ -212,7 +212,8 @@ The next thing was to deal with the performance of the website. Since, if the we
 | Hardhat | Ethereum development environment | https://hardhat.org/ |
 | Etherjs | Ethereum JavaScript API | 	https://docs.ethers.org/v5/ |
 | Polygon | Polygon (formerly known as Matic Network) is a Layer 2 scaling solution for Ethereum that enables faster and cheaper transactions on the blockchain. It leverages Ethereum as its main backbone while adding its own network of sidechains, allowing for efficient scaling and interoperability with other Ethereum-based systems. | https://polygon.technology/ |
-| Graph | 	Decentralized blockchain platform for building Cross Chain decentralized applications | https://thegraph.com/docs/en/developing/creating-a-subgraph/ |
+
+| Biconomy | Cross-Chain Transaction Infrastructure for DApps | https://docs.biconomy.io/ |
 </h4>
 
 <be>
@@ -220,7 +221,7 @@ The next thing was to deal with the performance of the website. Since, if the we
 
 ## 🎥 Video Demo
 
-https://youtu.be/EHjhnc4B_9M
+https://youtu.be/-2Wqw_Uj2Go
 
 
 ## 🤝 Contributing
